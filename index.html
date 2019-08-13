@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Survey Form</title>
+
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+  <style>
+    #title, #description{
+      text-align: center;
+    }
+    #survey-form{
+      display: grid;
+      justify-items: center;
+    }
+    #survey-form>:nth-child(1){
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 10px;
+      grid-column-gap: 10px;
+    }
+    #survey-form>:nth-child(1)>:nth-child(odd){
+      justify-self: end;
+      text-align: right;
+    }
+    #survey-form>:nth-child(1)>:nth-child(even){
+      justify-self: start;
+    }
+    #name, #email, #number, #age, #comments{
+      width: 80%;
+    }
+    .grid-radio, .grid-checkbox{
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+    }
+    #dropdown, #dropdown2{justify-self: start;}
+    #submit{
+      margin: 5px;
+      border-radius: 4px;
+      padding: .5rem 1rem;
+      background-color: lightblue;
+      color: white;
+    }
+    /*
+    #name-label, #email-label, #age-label, #number-label, #name, #email, #age, #number{}
+    */
+  </style>
+</head>
+<body>
+  <h1 id="title">Survey Form</h1>
+  <p id="description">Let us know how we can improve freeCodeCamp</p>
+  <form id="survey-form" action="">
+    <div>
+      <label for="name" id="name-label">* Name:</label>
+      <input id="name" name="name" type="text" placeholder="Enter your name" required="" autofocus="">
+
+      <label for="email" id="email-label">* Email:</label>
+      <input id="email" name="email" type="email" placeholder="Enter your Email" required="">
+
+      <label for="number" id="number-label">* Number:</label>
+      <input id="number" name="number" type="number" min="16" max="65" placeholder="Number" required="">
+
+      <label for="age" id="age-label">* Age:</label>
+      <input id="age" name="age" type="number" min="16" max="65" placeholder="Age" required="">
+
+      <label for="currentrol">Which option best describes your curent role?</label>
+      <select name="currentrol" id="dropdown">
+        <option disabled="" value="">Select an option</option>
+        <option value="Student">Student</option>
+        <option value="Full Time Job">Full Time Job</option>
+        <option value="Full Time Learner">Full Time Learner</option>
+        <option value="Prefer not to say">Prefer not to say</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="userRatings">* How likely is that you would recommend freeCodeCamp to a friend?</label>
+      <div name="userRatings" class="grid-radio">
+        <label><input name="userRating" type="radio" value="Definitely">Definitely</label>
+        <label><input name="userRating" type="radio" value="Maybe">Maybe</label>
+        <label><input name="userRating" type="radio" value="Not sure">Not sure</label>
+      </div>
+
+      <label for="">What do you like most in FCC:</label>
+      <select name="" id="dropdown2" class="dropdown">
+        <option disabled="" selected="" value="">Select an option</option>
+        <option value="Challenges">Challenges</option>
+        <option value="Projects">Projects</option>
+        <option value="Community">Community</option>
+        <option value="Open Source">Open Source</option>
+      </select>
+
+      <label for="preferences">Things that should be improved in the future<br>(Check all that apply):</label>
+      <div name="preferences" class="grid-checkbox">
+        <label><input type="checkbox" value="Front-end Project s">Front-end Projects</label>
+        <label><input type="checkbox" value="Back-end Projects">Back-end Projects</label>
+        <label><input type="checkbox" value="Data Visualization">Data Visualization</label>
+        <label><input type="checkbox" value="Challenges">Challenges</label>
+        <label><input type="checkbox" value="Open Source Community">Open Source Community</label>
+        <label><input type="checkbox" value="Gitter help">Gitter help</label>
+        <label><input type="checkbox" value="Videos">Videos</label>
+        <label><input type="checkbox" value="City Meetups">City Meetups</label>
+        <label><input type="checkbox" value="Wiki">Wiki</label>
+        <label><input type="checkbox" value="Forum">Forum</label>
+        <label><input type="checkbox" value="Additional Cources">Additional Cources</label>
+      </div>
+
+      <label for="comments">Any Comments or Suggestions?</label>
+      <textarea name="comments" id="comments" placeholder="Enter your comment here..." ></textarea>
+    </div>
+    <button id="submit" type="submit">Submit</button>
+  </form>
+  <script>
+    var f = document.querySelector(".grid-checkbox");
+    f.onchange = function() {
+      var n = f.querySelectorAll('[type="checkbox"]'),
+          l = f.querySelectorAll('[type="checkbox"]:checked');
+      for(var j=0; j<n.length; j++)
+        if (l.length >= 3) { // если отметить три и более галочки
+          n[j].disabled = true; // все чекбоксы становятся disabled
+          for(var i=0; i<l.length; i++)
+            l[i].disabled = false; // но disabled убирается с помеченных галочками чекбоксов
+        } else {
+          n[j].disabled = false; // если выделить менее трёх галочек, то disabled снимается со всех чекбоксов
+        }
+    }
+  </script>
+</body>
+</html>
